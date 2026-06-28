@@ -18,22 +18,31 @@ import PersonIcon from "@mui/icons-material/Person";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
-export default function Login({ onLogin }) {
+export default function Login() {
   const [municipalId, setMunicipalId] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
 
   const handleLogin = async () => {
+    setError("");
+
     try {
       await signInWithEmailAndPassword(
         auth,
-        municipalId,
+        municipalId.trim(),
         password
       );
 
+      console.log("Login Successful");
     } catch (err) {
-      setError("Invalid credentials");
+      console.error("Firebase Login Error:", err);
+      console.error("Error Code:", err.code);
+      console.error("Error Message:", err.message);
+
+      alert(`Firebase Error: ${err.code}`);
+
+      setError(err.code);
     }
   };
 
@@ -47,7 +56,8 @@ export default function Login({ onLogin }) {
     <Box
       sx={{
         minHeight: "100vh",
-        background: "linear-gradient(to bottom, #FF9933 0%, #FFFFFF 50%, #138808 100%)",
+        background:
+          "linear-gradient(to bottom, #FF9933 0%, #FFFFFF 50%, #138808 100%)",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -60,7 +70,7 @@ export default function Login({ onLogin }) {
           width: 430,
           padding: 5,
           borderRadius: 4,
-          boxShadow: "0 8px 32px rgba(19, 136, 8, 0.2)",
+          boxShadow: "0 8px 32px rgba(19,136,8,0.2)",
         }}
       >
         <Box
@@ -108,12 +118,12 @@ export default function Login({ onLogin }) {
 
         <TextField
           fullWidth
-          label="Municipal ID"
+          label="Email"
           value={municipalId}
           onChange={(e) =>
             setMunicipalId(e.target.value)
           }
-          onKeyPress={handleKeyPress}
+          onKeyDown={handleKeyPress}
           margin="normal"
           InputProps={{
             startAdornment: (
@@ -139,15 +149,13 @@ export default function Login({ onLogin }) {
 
         <TextField
           fullWidth
-          type={
-            showPassword ? "text" : "password"
-          }
+          type={showPassword ? "text" : "password"}
           label="Password"
           value={password}
           onChange={(e) =>
             setPassword(e.target.value)
           }
-          onKeyPress={handleKeyPress}
+          onKeyDown={handleKeyPress}
           margin="normal"
           InputProps={{
             startAdornment: (
@@ -159,11 +167,8 @@ export default function Login({ onLogin }) {
               <InputAdornment position="end">
                 <IconButton
                   onClick={() =>
-                    setShowPassword(
-                      !showPassword
-                    )
+                    setShowPassword(!showPassword)
                   }
-                  sx={{ color: "#138808" }}
                 >
                   {showPassword ? (
                     <VisibilityOff />
@@ -198,10 +203,11 @@ export default function Login({ onLogin }) {
             py: 1.4,
             fontWeight: "bold",
             fontSize: 16,
-            background: "linear-gradient(135deg, #FF9933 0%, #138808 100%)",
-            color: "white",
+            background:
+              "linear-gradient(135deg, #FF9933 0%, #138808 100%)",
             "&:hover": {
-              background: "linear-gradient(135deg, #E68820 0%, #0F6908 100%)",
+              background:
+                "linear-gradient(135deg, #E68820 0%, #0F6908 100%)",
             },
           }}
           onClick={handleLogin}
