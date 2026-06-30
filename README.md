@@ -1,70 +1,285 @@
-# Getting Started with Create React App
+# 🏛️ Sudhaar – Smart Municipal Complaint Management System
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern web-based Municipal Complaint Management System developed using **React.js**, **Firebase**, **Material UI**, **React Leaflet**, and **Recharts**. The system enables municipal authorities to manage citizen complaints efficiently through real-time updates, interactive dashboards, and location-based visualization.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 📌 Features
 
-### `npm start`
+### 🔐 Authentication
+- Firebase Email & Password Authentication
+- Secure Login System
+- Session Persistence
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 📋 Complaint Management
+- View all complaints
+- Update complaint status
+- Delete complaints (Admin)
+- Complaint details dialog
+- Real-time Firestore updates
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 📊 Analytics Dashboard
+- KPI Cards
+  - Total Complaints
+  - Pending
+  - In Progress
+  - Completed
+- Monthly Complaint Trend
+- Complaint Status Chart
+- Complaint Category Distribution
+- AI Insights
+- Recent Complaint Activity
 
-### `npm test`
+### 🗺️ Live Complaint Map
+- React Leaflet Integration
+- OpenStreetMap
+- Complaint Markers
+- Popup Details
+- Latitude & Longitude Support
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### ⚡ Real-Time Updates
+- Firestore onSnapshot Listener
+- Automatic Dashboard Refresh
+- Live Complaint Tracking
 
-### `npm run build`
+### 👥 Role-Based Access (In Progress)
+- Admin
+- Worker
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# 🛠️ Tech Stack
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Frontend
+- React.js
+- JavaScript (ES6+)
+- HTML5
+- CSS3
 
-### `npm run eject`
+## UI Framework
+- Material UI (MUI)
+- Material Icons
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Backend
+- Firebase Authentication
+- Cloud Firestore
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Charts
+- Recharts
+  - Line Chart
+  - Bar Chart
+  - Pie Chart
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Maps
+- React Leaflet
+- Leaflet.js
+- OpenStreetMap
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+# 📂 Project Structure
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```
+src/
+│
+├── components/
+│   ├── AIInsights.jsx
+│   ├── CategoryChart.jsx
+│   ├── ComplaintMap.jsx
+│   ├── Navbar.jsx
+│   ├── RecentActivity.jsx
+│   ├── Sidebar.jsx
+│   ├── StatusChart.jsx
+│   └── TrendChart.jsx
+│
+├── pages/
+│   ├── Analytics.jsx
+│   ├── Complaints.jsx
+│   ├── Dashboard.jsx
+│   └── Login.jsx
+│
+├── services/
+│   ├── firestoreService.js
+│   └── userService.js
+│
+├── firebase.js
+├── App.js
+└── index.js
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+# 📊 Dashboard Modules
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Dashboard
+- Complaint Overview
+- Quick Statistics
+- Navigation Panel
 
-### Analyzing the Bundle Size
+## Complaint Management
+- View Complaints
+- Update Status
+- Delete Complaint
+- Complaint Details
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Analytics
+- Live Complaint Map
+- Monthly Trends
+- Complaint Status
+- Complaint Categories
+- AI Insights
+- Recent Activities
 
-### Making a Progressive Web App
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+# 🔥 Firebase Collections
 
-### Advanced Configuration
+## reports
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```
+reports
+|
+|-- reportId
+      title
+      description
+      type
+      status
+      priority
+      assignedTo
+      imageURL
+      userName
+      location
+      timestamp
+```
 
-### Deployment
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## users
 
-### `npm run build` fails to minify
+```
+users
+|
+|-- uid
+      name
+      email
+      role
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
+
+# 🚀 Installation
+
+Clone the repository
+
+```bash
+git clone https://github.com/your-username/sudhaar.git
+```
+
+Go inside project
+
+```bash
+cd sudhaar
+```
+
+Install dependencies
+
+```bash
+npm install
+```
+
+Start project
+
+```bash
+npm start
+```
+
+---
+
+# 📦 Dependencies
+
+```bash
+npm install firebase
+npm install @mui/material
+npm install @mui/icons-material
+npm install recharts
+npm install react-router-dom
+npm install react-toastify
+npm install leaflet
+npm install react-leaflet
+```
+
+---
+
+# 🌍 Deployment
+
+Build project
+
+```bash
+npm run build
+```
+
+Deploy using Firebase Hosting
+
+```bash
+firebase login
+firebase init
+firebase deploy
+```
+
+---
+
+# 📈 Future Improvements
+
+- AI Complaint Classification
+- Email Notifications
+- SMS Alerts
+- Mobile Application
+- Image Recognition
+- Complaint Priority Automation
+- Worker Assignment System
+- Advanced Analytics
+- Government API Integration
+
+---
+
+# 🎯 Learning Outcomes
+
+This project demonstrates:
+
+- React Component Architecture
+- Firebase Authentication
+- Cloud Firestore Integration
+- Real-Time Database Updates
+- Dashboard Development
+- Data Visualization
+- Interactive Maps
+- CRUD Operations
+- Role-Based Access Control
+- Responsive UI Design
+
+---
+
+# 👨‍💻 Author
+
+**Pushpak Bala Gaidhane**
+
+### Technologies Used
+
+- React.js
+- Firebase Authentication
+- Cloud Firestore
+- Material UI
+- React Leaflet
+- OpenStreetMap
+- Recharts
+- JavaScript
+- HTML5
+- CSS3
+
+---
+
+# 📜 License
+
+This project is developed for educational purposes as part of a final-year engineering project.
+
+© 2026 Pushpak Bala Gaidhane
