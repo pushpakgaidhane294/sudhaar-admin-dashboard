@@ -105,9 +105,11 @@ export default function ComplaintMap({ reports }) {
                   Status :
                   {" "}
                   {report.status === 0
-                    ? "Pending"
+                    ? "Reported"
                     : report.status === 1
-                    ? "In Progress"
+                    ? "Validated"
+                    : report.status === 2
+                    ? "Working"
                     : "Completed"}
 
                   <br />

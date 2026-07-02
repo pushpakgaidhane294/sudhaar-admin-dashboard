@@ -84,22 +84,18 @@ const loadWorkers = async () => {
   };
 
   const getStatus = (status) => {
-    if (status === 0) return "Pending";
-    if (status === 1) return "In Progress";
-    if (status === 2) return "Completed";
+    if (status === 0) return "Reported";
+    if (status === 1) return "Validated";
+    if (status === 2) return "Working";
+    if (status === 3) return "Completed";
     return "Unknown";
   };
 
   const getStatusColor = (status) => {
-    if (status === 0)
-      return "#f59e0b";
-
-    if (status === 1)
-      return "#2563eb";
-
-    if (status === 2)
-      return "#16a34a";
-
+    if (status === 0) return "#ef4444";
+    if (status === 1) return "#f59e0b";
+    if (status === 2) return "#2563eb";
+    if (status === 3) return "#16a34a";
     return "#6b7280";
   };
 
@@ -310,20 +306,17 @@ const loadWorkers = async () => {
   const total =
     filteredReports.length;
 
-  const pending =
-    filteredReports.filter(
-      (r) => r.status === 0
-    ).length;
+  const reported =
+    filteredReports.filter((r) => r.status === 0).length;
 
-  const progress =
-    filteredReports.filter(
-      (r) => r.status === 1
-    ).length;
+  const validated =
+    filteredReports.filter((r) => r.status === 1).length;
+
+  const working =
+    filteredReports.filter((r) => r.status === 2).length;
 
   const completed =
-    filteredReports.filter(
-      (r) => r.status === 2
-    ).length;
+    filteredReports.filter((r) => r.status === 3).length;
       return (
     <div
       style={{
@@ -381,12 +374,16 @@ const loadWorkers = async () => {
             All
           </MenuItem>
 
-          <MenuItem value="Pending">
-            Pending
+          <MenuItem value="Reported">
+            Reported
           </MenuItem>
 
-          <MenuItem value="In Progress">
-            In Progress
+          <MenuItem value="Validated">
+            Validated
+          </MenuItem>
+
+          <MenuItem value="Working">
+            Working
           </MenuItem>
 
           <MenuItem value="Completed">
@@ -481,13 +478,18 @@ const loadWorkers = async () => {
         </div>
 
         <div className="card">
-          <h2>{pending}</h2>
-          <p>Pending</p>
+          <h2>{reported}</h2>
+          <p>Reported</p>
         </div>
 
         <div className="card">
-          <h2>{progress}</h2>
-          <p>In Progress</p>
+          <h2>{validated}</h2>
+          <p>Validated</p>
+        </div>
+
+        <div className="card">
+          <h2>{working}</h2>
+          <p>Working</p>
         </div>
 
         <div className="card">
@@ -652,50 +654,74 @@ const loadWorkers = async () => {
                   </td>
 
                   <td>
+                    {/* Reported */}
                     {report.status === 0 && (
                       <Button
                         variant="contained"
+                        color="warning"
                         onClick={() =>
-                          handleStatusChange(
-                            report.id,
-                            1
-                          )
+                          handleStatusChange(report.id, 1)
                         }
                       >
-                        Start
+                        Validate
                       </Button>
                     )}
 
+                    {/* Validated */}
                     {report.status === 1 && (
                       <div
                         style={{
                           display: "flex",
                           gap: "8px",
-                          justifyContent:
-                            "center",
+                          justifyContent: "center",
                         }}
                       >
                         <Button
-                          color="warning"
                           variant="contained"
+                          color="warning"
                           onClick={() =>
-                            handleStatusChange(
-                              report.id,
-                              0
-                            )
+                            handleStatusChange(report.id, 0)
                           }
                         >
                           Back
                         </Button>
 
                         <Button
-                          color="success"
                           variant="contained"
+                          color="info"
                           onClick={() =>
-                            handleStatusChange(
-                              report.id,
-                              2
-                            )
+                            handleStatusChange(report.id, 2)
+                          }
+                        >
+                          Start Work
+                        </Button>
+                      </div>
+                    )}
+
+                    {/* Working */}
+                    {report.status === 2 && (
+                      <div
+                        style={{
+                          display: "flex",
+                          gap: "8px",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <Button
+                          variant="contained"
+                          color="warning"
+                          onClick={() =>
+                            handleStatusChange(report.id, 1)
+                          }
+                        >
+                          Back
+                        </Button>
+
+                        <Button
+                          variant="contained"
+                          color="success"
+                          onClick={() =>
+                            handleStatusChange(report.id, 3)
                           }
                         >
                           Complete
@@ -703,15 +729,13 @@ const loadWorkers = async () => {
                       </div>
                     )}
 
-                    {report.status === 2 && (
+                    {/* Completed */}
+                    {report.status === 3 && (
                       <Button
-                        color="error"
                         variant="contained"
+                        color="secondary"
                         onClick={() =>
-                          handleStatusChange(
-                            report.id,
-                            1
-                          )
+                          handleStatusChange(report.id, 2)
                         }
                       >
                         Reopen

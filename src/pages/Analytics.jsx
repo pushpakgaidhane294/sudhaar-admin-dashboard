@@ -30,9 +30,10 @@ export default function Analytics() {
   }, []);
 
   const total = reports.length;
-  const pending = reports.filter(r => r.status === 0).length;
-  const progress = reports.filter(r => r.status === 1).length;
-  const completed = reports.filter(r => r.status === 2).length;
+  const reported = reports.filter(r => r.status === 0).length;
+  const validated = reports.filter(r => r.status === 1).length;
+  const working = reports.filter(r => r.status === 2).length;
+  const completed = reports.filter(r => r.status === 3).length;
 
   const cardStyle = {
     height: 160,
@@ -106,8 +107,8 @@ export default function Analytics() {
             ),
           },
           {
-            title: "Pending",
-            value: pending,
+            title: "Reported",
+            value: reported,
             icon: (
               <PendingActionsIcon
                 color="warning"
@@ -116,11 +117,21 @@ export default function Analytics() {
             ),
           },
           {
-            title: "Progress",
-            value: progress,
+            title: "Validated",
+            value: validated,
             icon: (
               <EngineeringIcon
                 color="info"
+                sx={{ fontSize: 40 }}
+              />
+            ),
+          },
+          {
+            title: "Working",
+            value: working,
+            icon: (
+              <EngineeringIcon
+                color="secondary"
                 sx={{ fontSize: 40 }}
               />
             ),

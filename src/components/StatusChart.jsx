@@ -1,32 +1,36 @@
 import {
-    Card,
-    CardContent,
-    Typography,
+  Card,
+  CardContent,
+  Typography,
 } from "@mui/material";
 
 import {
-    Bar,
-    BarChart,
-    CartesianGrid,
-    ResponsiveContainer,
-    Tooltip,
-    XAxis,
-    YAxis,
+  Bar,
+  BarChart,
+  CartesianGrid,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
 } from "recharts";
 
 export default function StatusChart({ reports }) {
   const data = [
     {
-      status: "Pending",
+      status: "Reported",
       value: reports.filter((r) => r.status === 0).length,
     },
     {
-      status: "In Progress",
+      status: "Validated",
       value: reports.filter((r) => r.status === 1).length,
     },
     {
-      status: "Completed",
+      status: "Working",
       value: reports.filter((r) => r.status === 2).length,
+    },
+    {
+      status: "Completed",
+      value: reports.filter((r) => r.status === 3).length,
     },
   ];
 
