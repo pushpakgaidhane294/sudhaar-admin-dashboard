@@ -8,7 +8,10 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import {
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { useState } from "react";
 import { auth } from "../firebase";
 
@@ -23,6 +26,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
 
   const handleLogin = async () => {
     setError("");
@@ -43,6 +47,23 @@ export default function Login() {
       alert(`Firebase Error: ${err.code}`);
 
       setError(err.code);
+    }
+  };
+
+  const handleForgotPassword = async () => {
+    setError("");
+    setMessage("");
+
+    if (!municipalId) {
+      setError("Please enter your email first.");
+      return;
+    }
+
+    try {
+      await sendPasswordResetEmail(auth, municipalId.trim());
+      setMessage("Password reset link has been sent to your email.");
+    } catch (err) {
+      setError(err.message || "Failed to send password reset email.");
     }
   };
 
@@ -113,6 +134,12 @@ export default function Login() {
         {error && (
           <Alert severity="error" sx={{ mb: 2 }}>
             {error}
+          </Alert>
+        )}
+
+        {message && (
+          <Alert severity="success" sx={{ mb: 2 }}>
+            {message}
           </Alert>
         )}
 
@@ -193,6 +220,16 @@ export default function Login() {
             },
           }}
         />
+
+        <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 1 }}>
+          <Button
+            variant="text"
+            size="small"
+            onClick={handleForgotPassword}
+          >
+            Forgot Password?
+          </Button>
+        </Box>
 
         <Button
           variant="contained"
